@@ -14,14 +14,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RecipeDto {
-    @NotBlank(message = "Name field couldn't be empty.")
+    @NotBlank(message = "Name field can't be empty.")
     @JsonProperty(value = "name")
     String name;
-    @NotBlank(message = "Category field couldn't be empty.")
+    @NotBlank(message = "Category field can't be empty.")
     @JsonProperty(value = "category")
     String category;
     String date;
-    @NotBlank(message = "Description field couldn't be empty.")
+    @NotBlank(message = "Description field can't be empty.")
     @JsonProperty(value = "description")
     String description;
     @Size(min = 1, message = "List of ingredients should contain at least 1 item")

@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class RecipeController {
             return ResponseEntity.badRequest().build();
         }
         String email = authentication.getName();
-        log.info("Post recipe {} ", recipeDto.getName());
+        log.info("POST recipe - '{}'", recipeDto.getName());
         return new ResponseEntity<>(Map.of("id", recipeService.saveRecipe(recipeDto, email)), HttpStatus.OK);
     }
 
@@ -48,12 +49,12 @@ public class RecipeController {
         log.info("Get Recipe {} ", id);
         return ResponseEntity.ok().body(recipeService.getRecipeById(id));
     }
-
+    @PreAuthorize("hasRole('AUTHOR')")
     @PutMapping("/{id}")
     public ResponseEntity<RecipeDto> updateRecipeById(@PathVariable("id") Long id, @Valid @RequestBody RecipeDto recipe)
             throws NotFoundException {
-        log.info("Put: Update Recipe {} ", id);
 
+        log.info("Put: Update Recipe {} ", id);
         recipeService.updateRecipe(id, recipe);
         return ResponseEntity.noContent().build();
     }
@@ -65,9 +66,10 @@ public class RecipeController {
             log.error("Search should be performed only by 1 parameter.");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+        log.info("Recipes are filtered by name or category.");
         return ResponseEntity.ok().body(recipeService.getAllRecipes(name, category));
     }
-
+    @PreAuthorize("hasRole('AUTHOR')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteRecipeById(@PathVariable("id") @NotNull Long id) throws NotFoundException {
         recipeService.deleteRecipeById(id);

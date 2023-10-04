@@ -1,6 +1,7 @@
 package recipes.model;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +14,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 @Entity
 @Table(name = "recipes")
 public class Recipe implements Serializable {
@@ -25,8 +28,9 @@ public class Recipe implements Serializable {
     String name;
     @Column(name = "category")
     String category;
+    @Builder.Default
     @Column(name = "recipe_date")
-    LocalDateTime date = LocalDateTime.now();
+    LocalDateTime date = LocalDateTime.now().withNano(0).withSecond(0);
     @Column(name = "description")
     String description;
 
