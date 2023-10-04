@@ -1,0 +1,1560 @@
+{
+	"info": {
+		"_postman_id": "a7a69238-7040-4a6d-98b2-321f00a896ed",
+		"name": "Recipes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26486851"
+	},
+	"item": [
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "register user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"email\": \"mockingbird@gmail.com\",\r\n   \"password\": \"mockingbird\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register user duplicate email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 400. Duplicate email\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"email\": \"mockingbird@gmail.com\",\r\n   \"password\": \"mockingbird\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register user no email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 400. No email\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"email\": \"\",\r\n   \"password\": \"mockingbird\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register user invalid email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 400. Invalid email\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"email\": \"mockingbirdgmail.com\",\r\n   \"password\": \"mockingbird\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RECIPE",
+			"item": [
+				{
+					"name": "create recipe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test create recipe\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id, '\"id\" field').greaterThan(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mockingbird",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mockingbird@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Fresh Mint Tea\",\r\n   \"category\": \"beverage\",\r\n   \"description\": \"Light, aromatic and refreshing beverage, ...\",\r\n   \"ingredients\": [\"boiled water\", \"honey\", \"fresh mint leaves\"],\r\n   \"directions\": [\"Boil water\", \"Pour boiling hot water into a mug\", \"Add fresh mint leaves\", \"Mix and let the mint leaves seep for 3-5 minutes\", \"Add honey and mix again\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/new",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create recipe empty name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 400. Name field can't be empty.\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mockingbird",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mockingbird@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"\",\r\n   \"category\": \"beverage\",\r\n   \"description\": \"Light, aromatic and refreshing beverage, ...\",\r\n   \"ingredients\": [\"boiled water\", \"honey\", \"fresh mint leaves\"],\r\n   \"directions\": [\"Boil water\", \"Pour boiling hot water into a mug\", \"Add fresh mint leaves\", \"Mix and let the mint leaves seep for 3-5 minutes\", \"Add honey and mix again\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/new",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create recipe empty category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 400. Category field can't be empty.\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mockingbird",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mockingbird@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Fresh Mint Tea\",\r\n   \"category\": \"\",\r\n   \"description\": \"Light, aromatic and refreshing beverage, ...\",\r\n   \"ingredients\": [\"boiled water\", \"honey\", \"fresh mint leaves\"],\r\n   \"directions\": [\"Boil water\", \"Pour boiling hot water into a mug\", \"Add fresh mint leaves\", \"Mix and let the mint leaves seep for 3-5 minutes\", \"Add honey and mix again\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/new",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create recipe empty description",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 400. Description field can't be empty.\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mockingbird",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mockingbird@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Fresh Mint Tea\",\r\n   \"category\": \"beverage\",\r\n   \"description\": \"\",\r\n   \"ingredients\": [\"boiled water\", \"honey\", \"fresh mint leaves\"],\r\n   \"directions\": [\"Boil water\", \"Pour boiling hot water into a mug\", \"Add fresh mint leaves\", \"Mix and let the mint leaves seep for 3-5 minutes\", \"Add honey and mix again\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/new",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create recipe empty ingredients",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 400. List of ingredients should contain at least 1 item.\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mockingbird",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mockingbird@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Fresh Mint Tea\",\r\n   \"category\": \"beverage\",\r\n   \"description\": \"Light, aromatic and refreshing beverage, ...\",\r\n   \"ingredients\": [],\r\n   \"directions\": [\"Boil water\", \"Pour boiling hot water into a mug\", \"Add fresh mint leaves\", \"Mix and let the mint leaves seep for 3-5 minutes\", \"Add honey and mix again\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/new",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create recipe empty directions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 400. List of directions should contain at least 1 step.\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mockingbird",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mockingbird@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Fresh Mint Tea\",\r\n   \"category\": \"beverage\",\r\n   \"description\": \"Light, aromatic and refreshing beverage, ...\",\r\n   \"ingredients\": [\"boiled water\", \"honey\", \"fresh mint leaves\"],\r\n   \"directions\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/new",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get recipe by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test get recipe\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name, '\"name\" field').to.eql('Fresh Mint Tea');\r",
+									"    pm.expect(jsonData.category, '\"category\" field').to.eql('beverage');\r",
+									"    pm.expect(jsonData.description, '\"description\" field').to.eql('Light, aromatic and refreshing beverage, ...');\r",
+									"    pm.expect(jsonData.ingredients.length, '\"ingredients\" field').to.eql(3);\r",
+									"    pm.expect(jsonData.directions.length, '\"directions\" field').to.eql(5);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mockingbird",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mockingbird@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get recipe not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 404. The recipe isn't found by id.\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mockingbird",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mockingbird@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update recipe by author",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mockingbird",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mockingbird@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Fresh Chamomile Tea\",\r\n   \"category\": \"beverage\",\r\n   \"description\": \"Light, aromatic and refreshing beverage, ...\",\r\n   \"ingredients\": [\"boiled water\", \"honey\", \"fresh mint leaves\"],\r\n   \"directions\": [\"Boil water\", \"Pour boiling hot water into a mug\", \"Add fresh mint leaves\", \"Mix and let the mint leaves seep for 3-5 minutes\", \"Add honey and mix again\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update recipe invalid name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mockingbird",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mockingbird@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"\",\r\n   \"category\": \"beverage\",\r\n   \"description\": \"Light, aromatic and refreshing beverage, ...\",\r\n   \"ingredients\": [\"boiled water\", \"honey\", \"fresh mint leaves\"],\r\n   \"directions\": [\"Boil water\", \"Pour boiling hot water into a mug\", \"Add fresh mint leaves\", \"Mix and let the mint leaves seep for 3-5 minutes\", \"Add honey and mix again\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register user 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"email\": \"davidcopperfield@gmail.com\",\r\n   \"password\": \"davidcopperfield\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search recipe by name (non-author)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test get filtered recipes by name and non-author\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].name, '\"name\" field').to.eql('Fresh Chamomile Tea');\r",
+									"    pm.expect(jsonData[0].category, '\"category\" field').to.eql('beverage');\r",
+									"    pm.expect(jsonData[0].description, '\"description\" field').to.eql('Light, aromatic and refreshing beverage, ...');\r",
+									"    pm.expect(jsonData[0].ingredients.length, '\"ingredients\" field').to.eql(3);\r",
+									"    pm.expect(jsonData[0].directions.length, '\"directions\" field').to.eql(5);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "davidcopperfield",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "davidcopperfield@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/search?name=Fresh Chamomile Tea",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Fresh Chamomile Tea"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search by 2 param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 400. The recipes can be filtered only by 1 param.\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "davidcopperfield",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "davidcopperfield@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/search?name=Fresh Chamomile Tea&category=beverage",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Fresh Chamomile Tea"
+								},
+								{
+									"key": "category",
+									"value": "beverage"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create recipe 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test create recipe\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id, '\"id\" field').greaterThan(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mockingbird",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mockingbird@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Ice-Cream\",\r\n   \"category\": \"dessert\",\r\n   \"description\": \"Light, sweet dessert, ...\",\r\n   \"ingredients\": [\"--\", \"--\", \"--\"],\r\n   \"directions\": [\"--\", \"--\", \"--\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/new",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete recipe 2 author",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mockingbird",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mockingbird@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get recipe 2 not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mockingbird",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mockingbird@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "401 Unauthorized",
+			"item": [
+				{
+					"name": "create recipe unauthorized user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 401. Unauthorized access.\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Fresh Mint Tea\",\r\n   \"category\": \"beverage\",\r\n   \"description\": \"Light, aromatic and refreshing beverage, ...\",\r\n   \"ingredients\": [\"boiled water\", \"honey\", \"fresh mint leaves\"],\r\n   \"directions\": [\"Boil water\", \"Pour boiling hot water into a mug\", \"Add fresh mint leaves\", \"Mix and let the mint leaves seep for 3-5 minutes\", \"Add honey and mix again\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/new",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get recipe unauthorized user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 401. Unauthorized access.\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update recipe unauthorized user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Fresh Chamomile Tea\",\r\n   \"category\": \"beverage\",\r\n   \"description\": \"Light, aromatic and refreshing beverage, ...\",\r\n   \"ingredients\": [\"boiled water\", \"honey\", \"fresh mint leaves\"],\r\n   \"directions\": [\"Boil water\", \"Pour boiling hot water into a mug\", \"Add fresh mint leaves\", \"Mix and let the mint leaves seep for 3-5 minutes\", \"Add honey and mix again\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete recipe unauthorized user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "403 Forbidden",
+			"item": [
+				{
+					"name": "update recipe by non-author",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "davidcopperfield",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "davidcopperfield@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Fresh Rose Tea\",\r\n   \"category\": \"beverage\",\r\n   \"description\": \"Light, aromatic and refreshing beverage, ...\",\r\n   \"ingredients\": [\"boiled water\", \"honey\", \"fresh mint leaves\"],\r\n   \"directions\": [\"Boil water\", \"Pour boiling hot water into a mug\", \"Add fresh mint leaves\", \"Mix and let the mint leaves seep for 3-5 minutes\", \"Add honey and mix again\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete recipe 1 non-author",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "davidcopperfield",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "davidcopperfield@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/recipe/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"recipe",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "localhost:8080"
+		}
+	]
+}

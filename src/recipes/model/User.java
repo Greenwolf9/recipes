@@ -8,6 +8,7 @@ import javax.validation.constraints.*;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
